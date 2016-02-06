@@ -5,18 +5,26 @@
             [reactive-clojure.marbles :as marbles]
             [cljs.core.async :refer [put! chan <! onto-chan]]))
 
+(enable-console-print!)
+
 (def marbles (atom {:input [{:t 10 :l 1}
                             {:t 30 :l 2}
                             {:t 80 :l 3}]
                     :output []}))
 
-(let [in  (chan)
-      out (chan)]
-  (onto-chan in (:input @marbles))
-  (go (loop []
-        (let [m (<! in)]
-          (swap! marbles (fn [old]
-                           (merge-with concat old {:output [m]}))))
+(def input (chan))
+(def output (chan))
+
+(onto-chan input (:input @marbles))
+(go (loop []
+      (let [m (<! input)]
+        (>! output m)
+        (recur))))
+
+(go (loop []
+      (let [m (<! output)]
+        (swap! marbles (fn [old]
+                         (merge-with into old {:output [m]})))
         (recur))))
 
 (defn simple-get []
