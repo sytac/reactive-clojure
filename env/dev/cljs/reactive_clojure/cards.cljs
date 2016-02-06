@@ -5,7 +5,9 @@
             [reactive-clojure.marbles-sandbox :as sandbox]
             [reactive-clojure.simple :as simple]
             [reactive-clojure.merge :as merge]
-            [reactive-clojure.distinct :as distinct])
+            [reactive-clojure.distinct :as distinct]
+            [reactive-clojure.first :as first]
+            [reactive-clojure.max :as max])
   (:require-macros
    [devcards.core
     :as dc
@@ -25,6 +27,9 @@
 (defcard-rg simple-get
   [:div
    (simple/simple-get)])
+
+(defcard-rg just-first
+  (first/just-first))
 
 (defcard-rg merged-chans
   (merge/merged))
