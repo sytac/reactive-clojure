@@ -4,7 +4,8 @@
             [reactive-clojure.core :as core]
             [reactive-clojure.marbles-sandbox :as sandbox]
             [reactive-clojure.simple :as simple]
-            [reactive-clojure.merge :as merge])
+            [reactive-clojure.merge :as merge]
+            [reactive-clojure.distinct :as distinct])
   (:require-macros
    [devcards.core
     :as dc
@@ -27,6 +28,9 @@
 
 (defcard-rg merged-chans
   (merge/merged))
+
+(defcard-rg distinct
+  (distinct/distinct-xf))
 
 (reagent/render [:div] (.getElementById js/document "app"))
 
