@@ -3,7 +3,7 @@
   (:require [reagent.core :as reagent :refer [atom]]
             [reactive-clojure.marbles-sandbox :as sandbox]
             [reactive-clojure.marbles :as marbles]
-            [cljs.core.async :refer [put! chan <! onto-chan merge]]))
+            [cljs.core.async :refer [put! chan <! onto-chan merge pipe]]))
 
 (def marbles (atom {:input-a [{:t 10 :l 1}
                               {:t 30 :l 2}
@@ -11,6 +11,10 @@
                     :input-b [{:t 20 :l \A}
                               {:t 50 :l \B}]
                     :output []}))
+
+(defn update-output [elem]
+  (swap! marbles (fn [old]
+                   (merge-with into old {:output [elem]}))))
 
 (defn render []
   (let [input-a (chan)
@@ -20,17 +24,12 @@
         _ (onto-chan input-a (:input-a @marbles))
         _ (onto-chan input-b (:input-b @marbles))]
     (swap! marbles assoc :output [])
-    (go (loop []
-          (let [m (<! input)]
-            (when m
-              (>! output m)
-              (recur)))))
-
+    (pipe input output)
     (go (loop []
           (let [m (<! output)]
-            (swap! marbles (fn [old]
-                             (merge-with into old {:output [m]})))
-            (recur))))))
+            (when m
+              (update-output m)
+              (recur)))))))
 
 (render)
 
