@@ -5,8 +5,6 @@
             [reactive-clojure.marbles :as marbles]
             [cljs.core.async :refer [put! chan <! onto-chan]]))
 
-(enable-console-print!)
-
 (def marbles (atom {:input [{:t 10 :l 1}
                             {:t 30 :l 2}
                             {:t 80 :l 3}]

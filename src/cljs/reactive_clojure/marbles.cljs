@@ -11,6 +11,20 @@
   (let [rect (.getBoundingClientRect box)]
     (.-left rect)))
 
+(defn color [label]
+  (let [colors ["#FFFFFF" ; white
+                "#ECECEC" ; almost white
+                "#A7A7A7" ; grey
+                "#7C7C7C" ; dark grey
+                "#A7A732" ; black
+                "#3EA1CB" ; blue
+                "#FFCB46" ; yellow
+                "#FF6946" ; red
+                "#82D736" ; green
+                ]
+        code (.charCodeAt (str label) 0)]
+    (colors (mod code (count colors)))))
+
 (defn find-marble [label store]
   (let [[idx el] (first (filter (fn [[idx el]] (= label (:l el)))
                                 (map-indexed vector (:input @store))))]
@@ -61,7 +75,7 @@
                 :r  "0.47"
                 :stroke-width "0.06px"
                 :style {:stroke "rgb(50, 50, 50)"
-                        :fill "rgb(255, 105, 70)"}}]]
+                        :fill (color label)}}]]
      [:p.marbleContent {:style {:-webkit-user-select "none"
                                 :width "100%"
                                 :height "100%"
@@ -90,7 +104,7 @@
               :r  "0.47"
               :stroke-width "0.06px"
               :style {:stroke "rgb(50, 50, 50)"
-                      :fill "rgb(255, 105, 70)"}}]]
+                      :fill (color label)}}]]
    [:p.marbleContent {:style {:-webkit-user-select "none"
                               :width "100%"
                               :height "100%"
