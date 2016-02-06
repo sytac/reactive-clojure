@@ -17,11 +17,13 @@
                  [environ "1.0.2"]
                  [org.clojure/clojurescript "1.7.228" :scope "provided"]
                  [secretary "1.2.3"]
+                 [cljs-http "0.1.39"]
                  [venantius/accountant "0.1.6"
                   :exclusions [org.clojure/tools.reader]]]
 
   :plugins [[lein-environ "1.0.2"]
             [lein-cljsbuild "1.1.1"]
+            [lein-less "1.7.5"]
             [lein-asset-minifier "0.2.4"
              :exclusions [org.clojure/clojure]]]
 
@@ -44,6 +46,9 @@
   :minify-assets
   {:assets
    {"resources/public/css/site.min.css" "resources/public/css/site.css"}}
+
+  :less {:source-paths ["src/less"]
+         :target-path "resources/public/css"}
 
   :cljsbuild {:builds {:app {:source-paths ["src/cljs" "src/cljc"]
                              :compiler {:output-to "target/cljsbuild/public/js/app.js"
