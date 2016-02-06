@@ -19,8 +19,9 @@
     (swap! marbles assoc :output [])
     (go (loop []
           (let [m (<! input)]
-            (>! output m)
-            (recur))))
+            (when m
+              (>! output m)
+              (recur)))))
 
     (go (loop []
           (let [m (<! output)]
@@ -32,6 +33,6 @@
 
 (defn simple-get []
   (sandbox/marble-sandbox
-   (sandbox/sandbox "input" (marbles/marbles-box (map marbles/marble (:input @marbles))))
+   (sandbox/sandbox "input" (marbles/marbles-box (map (partial marbles/marble marbles render) (:input @marbles))))
    (sandbox/operator "(<! channel)")
    (sandbox/sandbox "output" (marbles/marbles-box (map marbles/static-marble (:output @marbles))))))
