@@ -3,7 +3,7 @@
   (:require [reagent.core :as reagent :refer [atom]]
             [reactive-clojure.marbles-sandbox :as sandbox]
             [reactive-clojure.marbles :as marbles]
-            [cljs.core.async :refer [put! chan <! onto-chan]]))
+            [cljs.core.async :refer [put! chan <! >! onto-chan]]))
 
 (def marbles (atom {:input [{:t 10 :l 1}
                             {:t 30 :l 2}
@@ -26,6 +26,7 @@
 
     (go (loop []
           (let [m (<! output)]
+            (.log js/console (str "got " m))
             (swap! marbles (fn [old]
                              (merge-with into old {:output [m]})))
             (recur))))))
@@ -39,5 +40,6 @@
      (sandbox/sandbox "input" (marbles/marbles-box
                                (map (partial marbles/marble marbles render) in)))
      (sandbox/operator "(<! (chan 1 (distinct)))")
+     (.log js/console (str out))
      (sandbox/sandbox "output" (marbles/marbles-box
                                 (map marbles/static-marble out))))))

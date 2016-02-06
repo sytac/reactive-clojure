@@ -41,7 +41,6 @@
   (GET "/" [] loading-page)
   (GET "/about" [] loading-page)
   (GET "/cards" [] cards-page)
-  (POST "/count/slow" [] slow/counter)
   (resources "/")
   (not-found "Not Found"))
 

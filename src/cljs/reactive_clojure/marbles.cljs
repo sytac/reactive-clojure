@@ -55,7 +55,7 @@
 (defn marble [store render {time :t label :l}]
   (let [id (gensym)]
     [:div.marbleRoot.diagramMarble {:id id
-                                    :key label
+                                    :key (str (gensym) "-" label)
                                     :on-mouse-down #(dragging id label store render)
                                     :style {:display "inline-block"
                                             :left (str time "%")
@@ -86,7 +86,7 @@
                                 :line-height "32px"}} label]]))
 
 (defn static-marble [{time :t label :l}]
-  [:div.marbleRoot.diagramMarble {:key label
+  [:div.marbleRoot.diagramMarble {:key (str (gensym) "-" label)
                                   :style {:display "inline-block"
                                           :left (str time "%")
                                           :position "relative"

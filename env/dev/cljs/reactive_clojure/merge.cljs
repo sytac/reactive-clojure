@@ -23,7 +23,6 @@
     (go (loop []
           (let [m (<! input)]
             (when m
-              (.log js/console (str "got " m))
               (>! output m)
               (recur)))))
 
