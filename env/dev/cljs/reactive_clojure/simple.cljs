@@ -12,20 +12,23 @@
                             {:t 80 :l 3}]
                     :output []}))
 
-(def input (chan))
-(def output (chan))
+(defn render []
+  (let [input (chan)
+        output (chan)
+        _ (onto-chan input (:input @marbles))]
+    (swap! marbles assoc :output [])
+    (go (loop []
+          (let [m (<! input)]
+            (>! output m)
+            (recur))))
 
-(onto-chan input (:input @marbles))
-(go (loop []
-      (let [m (<! input)]
-        (>! output m)
-        (recur))))
+    (go (loop []
+          (let [m (<! output)]
+            (swap! marbles (fn [old]
+                             (merge-with into old {:output [m]})))
+            (recur))))))
 
-(go (loop []
-      (let [m (<! output)]
-        (swap! marbles (fn [old]
-                         (merge-with into old {:output [m]})))
-        (recur))))
+(render)
 
 (defn simple-get []
   (sandbox/marble-sandbox

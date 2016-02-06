@@ -6,7 +6,6 @@
             [reactive-clojure.middleware :refer [wrap-middleware]]
             [environ.core :refer [env]]
             [clojure.core.async :refer [go go-loop <! >! timeout alts! chan <!!]]
-            [reactive-clojure.slow :as slow]
             [ring.util.anti-forgery :as crsf]))
 
 (def mount-target
