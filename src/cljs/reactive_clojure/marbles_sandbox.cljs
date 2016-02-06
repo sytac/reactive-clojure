@@ -25,7 +25,8 @@
                                    :top "calc(41px)"}}]])
 
 (defn operator [text]
-  [:div.operatorBox {:style {:border "1px solid rgba(0, 0, 0, 0.0588235)"
+  [:div.operatorBox {:key (gensym)
+                     :style {:border "1px solid rgba(0, 0, 0, 0.0588235)"
                              :padding "22px"
                              :text-align "center"
                              :position "relative"}}
@@ -47,9 +48,10 @@
                   :bottom "0px"
                   :box-shadow "rgba(0, 0, 0, 0.258824) 0px 2px 5px 0px"}}]])
 
-(defn sandbox [class & content]
-  (let [element (keyword (str "div." class))]
-    [element {:style {:-webkit-user-select "none"
+(defn sandbox [class content]
+  (let [element (keyword (str "div." class "Sandbox"))]
+    [element {:key (gensym)
+              :style {:-webkit-user-select "none"
                       :overflow "visible"
                       :display "block"
                       :width "100%"
