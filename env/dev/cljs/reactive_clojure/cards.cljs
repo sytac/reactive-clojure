@@ -3,7 +3,8 @@
             [reagent.session :as session]
             [reactive-clojure.core :as core]
             [reactive-clojure.marbles-sandbox :as sandbox]
-            [reactive-clojure.simple :as simple])
+            [reactive-clojure.simple :as simple]
+            [reactive-clojure.merge :as merge])
   (:require-macros
    [devcards.core
     :as dc
@@ -20,8 +21,12 @@
                {:t 25
                 :l 2}]))
 
-(defcard-rg marble-card
-  (simple/simple-get))
+(defcard-rg simple-get
+  [:div
+   (simple/simple-get)])
+
+(defcard-rg merged-chans
+  (merge/merged))
 
 (reagent/render [:div] (.getElementById js/document "app"))
 

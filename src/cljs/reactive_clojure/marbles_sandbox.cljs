@@ -62,8 +62,7 @@
      content]))
 
 (defn marble-sandbox [& content]
-  [:div {:style {:position "absolute"
-                 :top "0px"
+  [:div {:style {:top "0px"
                  :display "inline-block"
                  :width "820px"}}
    [:div.sandboxRoot {:style {:width "820px"

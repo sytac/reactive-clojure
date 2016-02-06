@@ -34,5 +34,5 @@
 (defn simple-get []
   (sandbox/marble-sandbox
    (sandbox/sandbox "input" (marbles/marbles-box (map (partial marbles/marble marbles render) (:input @marbles))))
-   (sandbox/operator "(<! channel)")
+   (sandbox/operator "(<! (chan))")
    (sandbox/sandbox "output" (marbles/marbles-box (map marbles/static-marble (:output @marbles))))))
