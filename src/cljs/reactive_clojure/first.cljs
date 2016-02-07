@@ -22,9 +22,8 @@
     (pipe input output)
     (go
       (let [m (<! output)]
-        (if m
-          (update-output m)
-          (close! m))))))
+        (when m
+          (update-output m))))))
 
 (render)
 
