@@ -34,11 +34,11 @@
 (defcard-rg merged-chans
   (merge/merged))
 
-(defcard-rg distinct
-  (distinct/distinct-xf))
-
 (defcard-rg mapping
   (mapping/mapping))
+
+(defcard-rg distinct
+  (distinct/distinct-xf))
 
 (reagent/render [:div] (.getElementById js/document "app"))
 
