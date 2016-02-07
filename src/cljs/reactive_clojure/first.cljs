@@ -3,7 +3,7 @@
   (:require [reagent.core :as reagent :refer [atom]]
             [reactive-clojure.marbles-sandbox :as sandbox]
             [reactive-clojure.marbles :as marbles]
-            [cljs.core.async :refer [put! chan <! onto-chan pipe]]))
+            [cljs.core.async :refer [put! chan <! onto-chan pipe close!]]))
 
 (def marbles (atom {:input [{:t 10 :l 1}
                             {:t 30 :l 2}
@@ -22,8 +22,9 @@
     (pipe input output)
     (go
       (let [m (<! output)]
-        (when m
-          (update-output m))))))
+        (if m
+          (update-output m)
+          (close! m))))))
 
 (render)
 
