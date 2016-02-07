@@ -78,7 +78,7 @@
                                   [org.clojure/tools.nrepl "0.2.12"]
                                   [com.cemerick/piggieback "0.2.1"]
                                   [lein-doo "0.1.6"]
-                                  [devcards "0.2.0-8"
+                                  [devcards "0.2.1-6"
                                    :exclusions [org.clojure/tools.reader]]
                                   [pjstadig/humane-test-output "0.7.1"]
                                   ]

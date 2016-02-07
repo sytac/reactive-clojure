@@ -37,9 +37,9 @@
                   :right "0px"
                   :bottom "0px"
                   :box-shadow "rgba(0, 0, 0, 0.168627) 0px 2px 10px 0px"}}]
-   [:span.operatorLabel {:style {:font-family "'Source Code Pro', monospace"
-                                 :font-weight "400"
-                                 :font-size "2rem"}} text]
+   [:span.operatorLabel {:key (gensym) :style {:font-family "'Source Code Pro', monospace"
+                                         :font-weight "400"
+                                         :font-size "2rem"}} text]
    [:div {:style {:display "block"
                   :position "absolute"
                   :left "0px"

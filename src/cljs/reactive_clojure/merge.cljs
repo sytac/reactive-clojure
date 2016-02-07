@@ -3,7 +3,8 @@
   (:require [reagent.core :as reagent :refer [atom]]
             [reactive-clojure.marbles-sandbox :as sandbox]
             [reactive-clojure.marbles :as marbles]
-            [cljs.core.async :refer [put! chan <! onto-chan merge pipe]]))
+            [reactive-clojure.utils :as utils]
+            [cljs.core.async :refer [put! chan <! to-chan merge pipe]]))
 
 (def marbles (atom {:input-a [{:t 10 :l 1}
                               {:t 30 :l 2}
@@ -12,24 +13,12 @@
                               {:t 50 :l \Y}]
                     :output []}))
 
-(defn update-output [elem]
-  (swap! marbles (fn [old]
-                   (merge-with into old {:output [elem]}))))
-
 (defn render []
-  (let [input-a (chan)
-        input-b (chan)
-        output (chan)
-        input (merge [input-a input-b])
-        _ (onto-chan input-a (:input-a @marbles))
-        _ (onto-chan input-b (:input-b @marbles))]
+  (let [input-a (to-chan (:input-a @marbles))
+        input-b (to-chan (:input-b @marbles))
+        output  (merge [input-a input-b])]
     (swap! marbles assoc :output [])
-    (pipe input output)
-    (go (loop []
-          (let [m (<! output)]
-            (when m
-              (update-output m)
-              (recur)))))))
+    (utils/process output marbles)))
 
 (render)
 
@@ -37,5 +26,5 @@
   (sandbox/marble-sandbox
    (sandbox/sandbox "inputA" (marbles/marbles-box (map (partial marbles/marble marbles render) (:input-a @marbles))))
    (sandbox/sandbox "inputB" (marbles/marbles-box (map (partial marbles/marble marbles render) (:input-b @marbles))))
-   (sandbox/operator "(<! (merge (chan) (chan)))")
+   (sandbox/operator "(<! (merge [(chan) (chan)]))")
    (sandbox/sandbox "output" (marbles/marbles-box (map marbles/static-marble (:output @marbles))))))
