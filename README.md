@@ -22,7 +22,7 @@ To run the samples, you need to have [leiningen][lein]:
 $ lein fighweel devcards
 ```
 
-You can then visit `<http://localhost:3449/cards#!/reactive_clojure.cards>` to
+You can then visit <http://localhost:3449/cards#!/reactive_clojure.cards> to
 see the samples in action.
 
 # Credits
