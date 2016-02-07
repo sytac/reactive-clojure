@@ -16,13 +16,13 @@ the same goals of some well known Rx patterns.
 
 # Usage
 
-To run the samples, you need to have [leiningen][http://leiningen.org/]:
+To run the samples, you need to have [leiningen][lein]:
 
 ```
 $ lein fighweel devcards
 ```
 
-You can then visit `http://localhost:3449/cards#!/reactive_clojure.cards` to
+You can then visit `<http://localhost:3449/cards#!/reactive_clojure.cards>` to
 see the samples in action.
 
 # Credits
@@ -38,3 +38,4 @@ possible:
 [clj]: http://clojure.org/
 [rx-clj]: https://github.com/ReactiveX/RxClojure/
 [async]: https://github.com/clojure/core.async
+[lein]: http://leiningen.org
