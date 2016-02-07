@@ -9,7 +9,7 @@ of callbacks hell or coordination overhead.
 
 In the land of [Clojure][clj], while [some wrappers][rx-clj] are provided around
 the Java Rx port, a more idiomatic approach to asynchronous programming is
-provided by [core.async][async].
+provided by [`core.async`][async].
 
 This repository provides examples of how to use `core.async` to accomplish
 the same goals of some well known Rx patterns.
@@ -22,7 +22,7 @@ To run the samples, you need to have [leiningen][http://leiningen.org/]:
 $ lein fighweel devcards
 ```
 
-You can then go http://localhost:3449/cards#!/reactive_clojure.cards to
+You can then visit [[`http://localhost:3449/cards#!/reactive_clojure.cards`]] to
 see the samples in action.
 
 # Credits
