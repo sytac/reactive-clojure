@@ -30,5 +30,5 @@
 (defn just-first []
   (sandbox/marble-sandbox
    (sandbox/sandbox "input" (marbles/marbles-box (map (partial marbles/marble marbles render) (:input @marbles))))
-   (sandbox/operator "(<! (chan))")
+   (sandbox/operator "(<! (chan 5))")
    (sandbox/sandbox "output" (marbles/marbles-box (map marbles/static-marble (:output @marbles))))))
