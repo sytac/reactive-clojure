@@ -30,9 +30,9 @@ see the samples in action.
 Next to technologies mentioned above, the following tools made this effort
 possible:
 
-- [`reagent`][https://github.com/reagent-project/reagent]
-- [`reagint-template`][https://github.com/reagent-project/reagent-template]
-- [`devcards`][https://github.com/bhauman/devcards]
+- [`reagent`](https://github.com/reagent-project/reagent)
+- [`reagint-template`](https://github.com/reagent-project/reagent-template)
+- [`devcards`](https://github.com/bhauman/devcards)
 
 [rx]: http://reactivex.io/
 [clj]: http://clojure.org/
