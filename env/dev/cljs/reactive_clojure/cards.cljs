@@ -7,7 +7,7 @@
             [reactive-clojure.merge :as merge]
             [reactive-clojure.distinct :as distinct]
             [reactive-clojure.first :as first]
-            [reactive-clojure.max :as max])
+            [reactive-clojure.mapping :as mapping])
   (:require-macros
    [devcards.core
     :as dc
@@ -36,6 +36,9 @@
 
 (defcard-rg distinct
   (distinct/distinct-xf))
+
+(defcard-rg mapping
+  (mapping/mapping))
 
 (reagent/render [:div] (.getElementById js/document "app"))
 
