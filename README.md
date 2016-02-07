@@ -14,6 +14,26 @@ provided by [core.async][async].
 This repository provides examples of how to use `core.async` to accomplish
 the same goals of some well known Rx patterns.
 
+# Usage
+
+To run the samples, you need to have [leiningen][http://leiningen.org/]:
+
+```
+$ lein fighweel devcards
+```
+
+You can then go http://localhost:3449/cards#!/reactive_clojure.cards to
+see the samples in action.
+
+# Credits
+
+Next to technologies mentioned above, the following tools made this effort
+possible:
+
+- [`reagent`][https://github.com/reagent-project/reagent]
+- [`reagint-template`][https://github.com/reagent-project/reagent-template]
+- [`devcards`][https://github.com/bhauman/devcards]
+
 [rx]: http://reactivex.io/
 [clj]: http://clojure.org/
 [rx-clj]: https://github.com/ReactiveX/RxClojure/
