@@ -16,7 +16,7 @@
 (defcard-rg Intro
   [:div
    [:h1 "Reactive clojure with core.async"]
-   [:p "Marbles diagrams for " [:code "core.async "] "operators"]])
+   [:p "Marble diagrams for " [:code "core.async "] "operators"]])
 
 (def marbles (atom
               [{:t 10
