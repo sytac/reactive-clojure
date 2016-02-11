@@ -43,8 +43,9 @@
             relpos (- xpos parent-x)
             newtime (max 0
                          (min 100 (/ (* relpos 100) parent-w)))
-            [idx el] (find-marble label store)]
-        (swap! store assoc-in [:input idx :t] newtime)
+            [idx el] (find-marble label store)
+            newinput (vec (sort-by :t (assoc-in (:input @store) [idx :t] newtime)))]
+        (swap! store assoc :input newinput)
         (render)))))
 
 (defn drag-end-fn [drag-move drag-end]
