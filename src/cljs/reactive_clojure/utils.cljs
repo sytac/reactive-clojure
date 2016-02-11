@@ -4,7 +4,9 @@
 
 (defn update-output [marbles elem]
   (swap! marbles (fn [old]
-                   (merge-with into old {:output [elem]}))))
+                   (merge-with (comp vec
+                                     (partial sort-by (comp identity :t))
+                                     into) old {:output [elem]}))))
 
 (defn process [c marbles]
   (go (loop []

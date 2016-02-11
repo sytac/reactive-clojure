@@ -18,18 +18,12 @@
    [:h1 "Reactive clojure with core.async"]
    [:p "Marble diagrams for " [:code "core.async "] "operators"]])
 
-(def marbles (atom
-              [{:t 10
-                :l 1}
-               {:t 25
-                :l 2}]))
-
 (defcard-rg simple-get
   [:div
-   (simple/simple-get)])
+   [simple/simple-get]])
 
 (defcard-rg just-first
-  (first/just-first))
+  [first/just-first])
 
 (defcard-rg merged-chans
   (merge/merged))
