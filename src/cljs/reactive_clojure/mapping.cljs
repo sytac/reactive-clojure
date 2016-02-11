@@ -11,11 +11,14 @@
                             {:t 80 :l 3}]
                     :output []}))
 
+(defn inc-label
+  [{time :t label :l}]
+  {:t time :l (inc label)})
+
 (defn render []
   (let [input (chan)
-        output (chan 1 (map (fn [{time :t label :l}] {:t time :l (inc label)})))
+        output (chan 1 (map inc-label))
         _ (onto-chan input (:input @marbles))]
-    (swap! marbles assoc :output [])
     (pipe input output)
     (utils/process output marbles)))
 

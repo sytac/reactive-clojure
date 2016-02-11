@@ -17,7 +17,6 @@
   (let [input-a (to-chan (:input-a @marbles))
         input-b (to-chan (:input-b @marbles))
         output  (merge [input-a input-b])]
-    (swap! marbles assoc :output [])
     (utils/process output marbles)))
 
 (render)

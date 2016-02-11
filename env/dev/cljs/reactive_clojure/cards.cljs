@@ -26,13 +26,13 @@
   [first/just-first])
 
 (defcard-rg merged-chans
-  (merge/merged))
+  [merge/merged])
 
 (defcard-rg mapping
-  (mapping/mapping))
+  [mapping/mapping])
 
 (defcard-rg distinct
-  (distinct/distinct-xf))
+  [distinct/distinct-xf])
 
 (reagent/render [:div] (.getElementById js/document "app"))
 

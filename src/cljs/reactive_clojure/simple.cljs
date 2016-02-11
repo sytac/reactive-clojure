@@ -14,7 +14,6 @@
 (defn render []
   (let [input (to-chan (:input @marbles))
         output (chan)]
-    (swap! marbles assoc :output [])
     (pipe input output)
     (utils/process output marbles)))
 
