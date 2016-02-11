@@ -9,11 +9,14 @@
                                      into) old {:output [elem]}))))
 
 (defn process [c marbles]
-  (go (loop []
-        (let [m (<! c)]
-          (when m
-            (update-output marbles m)
-            (recur))))))
+  (let [state (atom {:output []})]
+    (go (loop []
+          (let [m (<! c)]
+            (if (not (nil? m))
+              (do
+                (update-output state m)
+                (recur))
+              (swap! marbles merge @state)))))))
 
 (defn distinct-label
   ([]
