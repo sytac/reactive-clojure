@@ -6,11 +6,11 @@
             [reactive-clojure.utils :as utils]
             [cljs.core.async :refer [put! chan <! to-chan merge pipe]]))
 
-(def marbles (atom {:input-a [(utils/identifiable [{:t 10 :l 1}
-                                                    {:t 30 :l 2}
-                                                    {:t 80 :l 3}])
-                              (utils/identifiable [{:t 20 :l \X}
-                                                            {:t 50 :l \Y}])]
+(def marbles (atom {:input [(utils/identifiable [{:t 10 :l 1}
+                                                 {:t 30 :l 2}
+                                                 {:t 80 :l 3}])
+                            (utils/identifiable [{:t 20 :l \X}
+                                                 {:t 50 :l \Y}])]
                     :output []}))
 
 (defn render []
@@ -23,7 +23,7 @@
 
 (defn merged []
   (sandbox/marble-sandbox
-   (sandbox/sandbox "inputA" (marbles/marbles-box (map (partial marbles/marble marbles render) (:input-a @marbles))))
-   (sandbox/sandbox "inputB" (marbles/marbles-box (map (partial marbles/marble marbles render) (:input-b @marbles))))
+   (sandbox/sandbox "inputA" (marbles/marbles-box (map (partial marbles/marble marbles render) ((:input @marbles) 0))))
+   (sandbox/sandbox "inputB" (marbles/marbles-box (map (partial marbles/marble marbles render) ((:input @marbles) 1))))
    (sandbox/operator "(<! (merge [(chan) (chan)]))")
    (sandbox/sandbox "output" (marbles/marbles-box (map marbles/static-marble (:output @marbles))))))
