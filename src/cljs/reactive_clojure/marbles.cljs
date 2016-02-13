@@ -15,11 +15,11 @@
         code (.charCodeAt (str label) 0)]
     (colors (mod code (count colors)))))
 
-(defn marble [store render {time :t label :l}]
+(defn marble [store render {time :t label :l marble-id :id}]
   (let [id (str (gensym) "-marble")]
     [:div.marbleRoot.diagramMarble {:id id
-                                    :key (str (gensym) "-" label)
-                                    :on-mouse-down #(anim/dragging id label store render)
+                                    :key id
+                                    :on-mouse-down #(anim/dragging id marble-id store render)
                                     :style {:display "inline-block"
                                             :left (str time "%")
                                             :position "relative"

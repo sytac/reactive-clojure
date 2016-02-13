@@ -18,6 +18,10 @@
                 (recur))
               (swap! marbles merge @state)))))))
 
+(defn identifiable
+  [marblev]
+  (mapv #(assoc % :id (gensym)) marblev))
+
 (defn distinct-label
   ([]
    (fn [rf]
