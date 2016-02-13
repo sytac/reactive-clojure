@@ -21,8 +21,8 @@
   (let [rect (.getBoundingClientRect box)]
     (.-width rect)))
 
-(defn find-marble
-  "Finds the marble with the given id within the deref-able store"
+(defn id->store-path
+  "Finds the path of marble with the given id within the deref-able store"
   [id store]
   (let [[idx el] (first (filter (fn [[idx el]] (= id (:id el)))
                                 (map-indexed vector (:input @store))))]
@@ -43,7 +43,7 @@
             relpos (- xpos parent-x)
             newtime (max 0
                          (min 100 (/ (* relpos 100) parent-w)))
-            [idx el] (find-marble marble-id store)
+            [idx el] (id->store-path marble-id store)
             newinput (vec (sort-by :t (assoc-in (:input @store) [idx :t] newtime)))]
         (swap! store assoc :input newinput)
         (render)))))
