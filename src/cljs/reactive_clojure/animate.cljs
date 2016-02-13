@@ -29,7 +29,7 @@
 (defn input-and-index
   "Finds the input with the marble with the provided id, and its relative index inside it"
   [id inputs]
-  (keep-indexed #(when-let [m (marble-index id %2)] [%1 m :t]) inputs))
+  (first (keep-indexed #(when-let [m (marble-index id %2)] [%1 m :t]) inputs)))
 
 (defn id->store-path
   "Finds the path of a marble within the given store"
@@ -54,7 +54,8 @@
             newtime (max 0
                          (min 100 (/ (* relpos 100) parent-w)))
             idx (marble-index marble-id (:input @store))
-            newinput (vec (sort-by :t (assoc-in (:input @store) [idx :t] newtime)))]
+            path (id->store-path marble-id (:input @store))
+            newinput (vec (sort-by :t (assoc-in (:input @store) path newtime)))]
         (swap! store assoc :input newinput)
         (render)))))
 
