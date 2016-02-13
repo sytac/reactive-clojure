@@ -21,12 +21,22 @@
   (let [rect (.getBoundingClientRect box)]
     (.-width rect)))
 
+(defn marble-index
+  "Finds the index of a marble within the given array"
+  [id marblev]
+  (first (keep-indexed #(when (= id (:id %2)) %1) marblev)))
+
+(defn input-and-index
+  "Finds the input with the marble with the provided id, and its relative index inside it"
+  [id inputs]
+  (keep-indexed #(when-let [m (marble-index id %2)] [%1 m :t]) inputs))
+
 (defn id->store-path
-  "Finds the path of marble with the given id within the deref-able store"
-  [id store]
-  (let [[idx el] (first (filter (fn [[idx el]] (= id (:id el)))
-                                (map-indexed vector (:input @store))))]
-    [idx el]))
+  "Finds the path of a marble within the given store"
+  [id input-marbles]
+  (if (map? (first input-marbles))
+    [(marble-index id input-marbles) :t] ; single input
+    (input-and-index id input-marbles))) ; multiple inputs
 
 (defn drag-move-fn
   "Creates a function that's able to move a marble. It requires:
@@ -43,7 +53,7 @@
             relpos (- xpos parent-x)
             newtime (max 0
                          (min 100 (/ (* relpos 100) parent-w)))
-            [idx el] (id->store-path marble-id store)
+            idx (marble-index marble-id (:input @store))
             newinput (vec (sort-by :t (assoc-in (:input @store) [idx :t] newtime)))]
         (swap! store assoc :input newinput)
         (render)))))
