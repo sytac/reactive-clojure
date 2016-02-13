@@ -6,7 +6,7 @@
             [reactive-clojure.utils :as utils]
             [cljs.core.async :refer [put! chan <! onto-chan to-chan pipe]]))
 
-(def marbles (atom {:input (utils/identifiable [{:t 10 :l 60}
+(def marbles (atom {:input (utils/identifiable [{:t 10 :l 31}
                                                 {:t 30 :l 12}
                                                 {:t 80 :l 42}])
                     :output []}))
