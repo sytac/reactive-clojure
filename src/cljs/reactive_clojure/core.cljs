@@ -8,12 +8,15 @@
 ;; Views
 
 (defn home-page []
-  [:div [:h2 "Welcome to reactive-clojure"]
-   [:div [:a {:href "/about"} "go to about page"]]])
-
-(defn about-page []
-  [:div [:h2 "About reactive-clojure"]
-   [:div [:a {:href "/"} "go to the home page"]]])
+  [:div {:style {:padding-left "10px"
+                 :padding-right "52px"}}
+   [:div {:style {:position "relative"
+                  :width "1060px"
+                  :margin "0px auto"}}
+    [:h1 {:style {:font-family "Signika, Helvetica, serif"
+                  :color "rgb(124, 124, 124)"
+                  :display "inline-block"
+                  :width "218px"}} "RxClojure"]]])
 
 (defn current-page []
   [:div [(session/get :current-page)]])
@@ -23,9 +26,6 @@
 
 (secretary/defroute "/" []
   (session/put! :current-page #'home-page))
-
-(secretary/defroute "/about" []
-  (session/put! :current-page #'about-page))
 
 ;; -------------------------
 ;; Initialize app
